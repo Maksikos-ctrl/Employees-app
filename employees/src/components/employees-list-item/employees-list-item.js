@@ -1,37 +1,59 @@
-
+import { Component } from 'react';
 import './employees-list-item.css';
 
 
-const EmployeesListItem = ({name, salary, increase}) => {
+class EmployeesListItem extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            increase: false,
+            star: false
+        }
+    };
 
-    //! return false -  used to prevent something from happening
+    increaseIt = () => { // callback юзать нужно потому что у нас зависит настоящее состояние от прошлого
+        this.setState(({increase, star}) => ({ // записивают аргумент диструкторивно чтобы потом не писать state.increase
+            increase: !increase,
+            star: !star
+        }));
+    }
 
-    let classIncrease = increase ? ' increase' : '';
+    render() {
+        const {name, salary} = this.props,
+            {increase, star} = this.state;
 
-    // let classNames = 'list-group-item d-flex justify-content-between';  // Ванино решение
+        //! return false -  used to prevent something from happening
 
-    // if (increase) {
-    //     classNames += ' increase';
-    // } 
+        let classIncrease = increase ? ' increase' : '',
+            classStar = star ? ' like' : '';
 
-    return (
-        <li className={'list-group-item d-flex justify-content-between ' + classIncrease}>
-            <span className="list-group-item-label">{name}</span>
-            <input type="text" className="list-group-item-input" defaultValue={salary + '$'}/>
-            <div className='d-flex justify-content-center align-items-center'>
-                <button type="button"
-                    className="btn-cookie btn-sm ">
-                    <i className="fas fa-cookie"></i>
-                </button>
+        // let classNames = 'list-group-item d-flex justify-content-between';  // Ванино решение
 
-                <button type="button"
-                        className="btn-trash btn-sm ">
-                    <i className="fas fa-trash"></i>
-                </button>
-                <i className="fas fa-star"></i>
-            </div>
-      </li>
-    );  
+        // if (increase) {
+        //     classNames += ' increase';
+        // } 
+
+        return (
+            <li className={'list-group-item d-flex justify-content-between ' + classIncrease + classStar}>
+                <span className="list-group-item-label">{name}</span>
+                <input type="text" className="list-group-item-input" defaultValue={salary + '$'}/>
+                <div className='d-flex justify-content-center align-items-center'>
+                    <button type="button"
+                        className="btn-cookie btn-sm " onClick={this.increaseIt}>
+                        <i className="fas fa-cookie"></i>
+                    </button>
+
+                    <button type="button"
+                            className="btn-trash btn-sm ">
+                        <i className="fas fa-trash"></i>
+                    </button>
+                    <i className="fas fa-star"></i>
+                </div>
+        </li>
+        );  
+    }
+
+   
 };
 
 export default  EmployeesListItem;
