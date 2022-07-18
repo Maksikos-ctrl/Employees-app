@@ -22,28 +22,39 @@ class EmployeeAddingForm extends Component {
     
     onSubmit = e => {
         e.preventDefault();
-        this.props.onAdd(this.state.name, this.state.salary);
-        this.setState({
-            name: '',
-            salary: ''
-        });
+       
+        if (this.state.name.length >= 3 && this.state.salary !== '') {
+            this.props.onAdd(this.state.name, this.state.salary);
+            this.setState({
+                name: '',
+                salary: '',
+                err: false
+            });
+        } else {
+            this.setState({
+                err: true
+            })
+        }
+        
     }
 
     
 
 
     render() { //! Неуправляемий input это inputTypeFile когда юзер загружает в него какой-то файл
-        const {name, salary} = this.state
+        const {name, salary, err} = this.state;
+
+        let classErr = err ? ' red' : '';
         return (
             <div className="app-add-form">
                 <h3>Add new employee, please</h3>
                 <form
                     className="add-form d-flex" onSubmit={this.onSubmit}>
                     <input type="text"
-                        className="form-control new-post-label"
+                        className={"form-control new-post-label " + classErr}
                         placeholder="What is his name?" name="name" value={name} onChange={this.onValueChanging}/>
                     <input type="number"
-                        className="form-control new-post-label"
+                        className={"form-control new-post-label" + classErr} 
                         placeholder="Salary in $?" name="salary" value={salary} onChange={this.onValueChanging}/>
         
                     <button type="submit"

@@ -10,7 +10,7 @@ import './employees-list.css';
 //? Помогает алгоритм согласование который сравнивает старые и новые копии DOM-дерева
 
 
-const EmployeeList = ({data, onDelete, onToggleIncrease, onToggleRise}) => {
+const EmployeeList = ({data, onDelete, onToggleProp, onSalaryChange}) => {
 
     //? Деструктуризация — относительно новый способ получения (извлечения) значений объекта или массива.
 
@@ -20,7 +20,7 @@ const EmployeeList = ({data, onDelete, onToggleIncrease, onToggleRise}) => {
 
         return (
             // <EmployeesListItem name={i.name} salary={i.salary}/>
-            <EmployeesListItem key={id} {...itemProps} onDelete={() => onDelete(id)} onToggleIncrease={() => onToggleIncrease(id)} onToggleRise={() => onToggleRise(id)}/>  
+            <EmployeesListItem key={id} {...itemProps} onDelete={() => onDelete(id)} onToggleProp={(e) => onToggleProp(id, e.currentTarget.getAttribute('data-toggle'))} onSalaryChange={(e) => onSalaryChange(id, e.target.value)}/>  
         );
     });
 

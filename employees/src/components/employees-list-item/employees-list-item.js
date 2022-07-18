@@ -20,13 +20,13 @@ const EmployeesListItem = (props) => {
     // }
 
    
-    const {name, salary, onDelete, onToggleIncrease, onToggleRise, increase, star} = props;
+    const {name, salary, onDelete, onToggleProp, increase, rise, onSalaryChange} = props;
         // {increase, star} = this.state;
 
     //! return false -  used to prevent something from happening
 
     let classIncrease = increase ? ' increase' : '',
-        classStar = star ? ' like' : '';
+        classStar = rise ? ' like' : '';
 
     // let classNames = 'list-group-item d-flex justify-content-between';  // Ванино решение
 
@@ -36,11 +36,11 @@ const EmployeesListItem = (props) => {
 
     return (
         <li className={'list-group-item d-flex justify-content-between ' + classIncrease + classStar}>
-            <span className="list-group-item-label" onClick={onToggleRise}>{name}</span>
+            <span className="list-group-item-label" onClick={onToggleProp} data-toggle="rise" onChange={onSalaryChange}>{name}</span>
             <input type="text" className="list-group-item-input" defaultValue={salary + '$'}/>
             <div className='d-flex justify-content-center align-items-center'>
                 <button type="button"
-                    className="btn-cookie btn-sm " onClick={onToggleIncrease}>
+                    className="btn-cookie btn-sm " onClick={onToggleProp} data-toggle="increase">
                     <i className="fas fa-cookie"></i>
                 </button>
 
