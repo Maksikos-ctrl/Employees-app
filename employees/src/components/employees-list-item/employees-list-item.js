@@ -36,7 +36,7 @@ const EmployeesListItem = (props) => {
 
     return (
         <li className={'list-group-item d-flex justify-content-between ' + classIncrease + classStar}>
-            <span className="list-group-item-label" onClick={onToggleProp} data-toggle="rise" onChange={onSalaryChange}>{name}</span>
+            <span className="list-group-item-label" onClick={onToggleProp} data-toggle="rise" onChange={onSalaryChange} style={{}}>{name}</span> 
             <input type="text" className="list-group-item-input" defaultValue={salary + '$'}/>
             <div className='d-flex justify-content-center align-items-center'>
                 <button type="button"

@@ -1,15 +1,17 @@
 import { Component } from 'react';
 
+// import './employees-add-form.css';
 import './employees-add-form.css';
 
+// super даёт доступ к прототипу базового класса, позволяя вызывать его методы.
+
 class EmployeeAddingForm extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: '',
-            salary: ''
-        }
-    } 
+    
+    state = {
+        name: '',
+        salary: ''
+    }
+    
 
     onValueChanging = (e) => { // расскриваем просто как обычний объект потому что мы не привязиваемся к тому что было введено в прошлом state
         this.setState({ // e.target.value - значение нашого input который был введён
@@ -38,6 +40,14 @@ class EmployeeAddingForm extends Component {
         
     }
 
+
+    static onLog = () => {
+        console.log('jjj');
+    };
+
+
+    static logged = 'on';
+
     
 
 
@@ -65,5 +75,8 @@ class EmployeeAddingForm extends Component {
     }
     
 };
+
+EmployeeAddingForm.onLog();
+console.log(EmployeeAddingForm.logged);
 
 export default EmployeeAddingForm;
